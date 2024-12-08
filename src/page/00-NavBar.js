@@ -19,6 +19,14 @@ const NavBar = ({ accounts, setAccounts }) => {
   const homeClick = () => {
     navigate("/"); // 跳转到 /home 页面
   };
+  // 点击 Mint 按钮时跳转到 /Mint 页面
+  const mintOnclick = () => {
+    navigate("/Mint");
+  };
+  // 点击 koko 按钮时跳转到 /Koko 页面
+  const joinOnclick = () => {
+    navigate("/Koko");
+  };
   async function connectMetaMask() {
     // 检查窗口对象是否包含 ethereum 对象（MetaMask 注入的对象）
     if (typeof window.ethereum !== "undefined") {
@@ -43,8 +51,10 @@ const NavBar = ({ accounts, setAccounts }) => {
             width="40%"
             padding="30px"
           >
-            <Box margin="0 15px">Facebook</Box> <Spacer />
-            <Box margin="0 15px">Twitter</Box> <Spacer />
+            <button onClick={mintOnclick}>Mint</button>
+            <Spacer />
+            <button onClick={joinOnclick}>Join</button>
+            <Spacer />
             <Box margin="0 15px">Email</Box>
             <Spacer />
           </Flex>

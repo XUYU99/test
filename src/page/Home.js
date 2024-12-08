@@ -1,6 +1,7 @@
 // Home.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ethers } from "ethers";
 import {
   ChakraBaseProvider,
   Box,
@@ -10,35 +11,61 @@ import {
   Flex,
   Spacer,
 } from "../setting/component";
+import {
+  PRIVATE_KEY0,
+  HARDHAT_RPC_URL,
+  SEPOLIA_RPC_URL,
+  SEPOLIA_PRIVATE_KEY0,
+} from "../setting/accountSetting";
 import NavBar from "./00-NavBar";
 import deployNFT, {
+  kokoTokenContract,
+  catNFTContract,
   metadataArrary,
   tokenIdArrary,
 } from "../scripts/CatNFT/deployNFT";
 import NFTDetail from "./catNFT-detail";
+import kokoCatNFT from "../artifacts/contracts/catNFT/kokoCatNFT.sol/kokoCatNFT.json";
 
 function Home({ accounts, setAccounts }) {
   const navigate = useNavigate(); // 初始化 useNavigate，用于页面跳转
-  const [catNFTContract, sercatNFTContract] = useState(null);
+  const [kokoTokenContract, setkokoTokenContract] = useState(null);
+  const [catNFTContract, setcatNFTContract] = useState(null);
   const [catNFTproperties, setcatNFTproperties] = useState([]);
   const [property, setSelectedProperty] = useState({});
   const [toggle, setToggle] = useState(false); // catNFT Property detail 窗口
-
+  var provider;
+  provider = new ethers.providers.JsonRpcProvider(HARDHAT_RPC_URL);
   // 点击 Mint 按钮时跳转到 /Mint 页面
   const mintClick = () => {
     navigate("/Mint");
   };
-
   // 点击 koko 按钮时跳转到 /Koko 页面
   const joinClick = () => {
     navigate("/Koko");
   };
-  async function mintCatNFT_Onclick() {
+
+  async function mintKokoTokenOnclick() {
+    // const miner = new ethers.Wallet(PRIVATE_KEY0, provider);
+    // const minerAddress = miner.address;
+    // console.log("miner Address:", minerAddress);
+    // const testfactory = new ethers.ContractFactory(
+    //   kokoToken.abi,
+    //   kokoToken.bytecode,
+    //   signer
+    // );
+    // // 部署 kokoToken 合约, 并挖了100个koko币
+    // kokoTokenContract = await testfactory.deploy("koko", "KO");
+    // await kokoTokenContract.deployTransaction.wait();
+    // testcontractAddress = await kokoTokenContract.address;
+  }
+  async function deployCatNFT_Onclick() {
     if (typeof window.ethereum !== "undefined") {
       try {
-        const catNFTContract = await deployNFT(); // 调用部署函数
-        sercatNFTContract(catNFTContract);
-        console.log("部署成功～～");
+        const deployNFTReturn = await deployNFT(); // 调用部署函数
+        // setkokoTokenContract(deployNFTReturn.kokoTokenContract);
+        setcatNFTContract(deployNFTReturn);
+        console.log("部署成功～～;", deployNFTReturn);
         // alert("NFT 部署成功！"); // 部署成功提示
       } catch (error) {
         console.error("部署失败：", error);
@@ -59,21 +86,37 @@ function Home({ accounts, setAccounts }) {
   function loadBlockchainDataOnclick() {
     loadBlockchainData(); // 调用主加载函数
   }
+  async function loadBlockchainData() {
+    provider = new ethers.providers.JsonRpcProvider("http://localhost:8545");
+    setkokoTokenContract(kokoTokenContract);
+    setcatNFTContract(catNFTContract);
 
-  const loadBlockchainData = async () => {
+    // const sepolia_RPC_url =
+    //   "https://eth-sepolia.g.alchemy.com/v2/2KkFyvuudsLojSoqpr7iZiC-iWImsIKk";
+    //  provider = new ethers.providers.JsonRpcProvider(sepolia_RPC_url);
+    // const catNFTContractAddress = "0xDEa41863976fB16eDDdfd5d113093f1848aa9532";
+    // const catNFTContract = new ethers.Contract(
+    //   catNFTContractAddress,
+    //   kokoCatNFT.abi,
+    //   provider
+    // );
+    // const kokoToken = new ethers.Contract(
+    //   catNFTContractAddress,
+    //   kokoCatNFT.abi,
+    //   provider
+    // );
     const catNFTproperties = [];
     const totalSupply = await catNFTContract.getTotalMintSupply();
     console.log("totalSupply", totalSupply.toString());
     for (let i = 0; i < totalSupply; i++) {
       // 请求 URI 获取猫猫元数据
-      const tokenUrljson = await catNFTContract.tokenURI(tokenIdArrary[i]);
+      const tokenUrljson = await catNFTContract.tokenURI(i);
       const response = await fetch(tokenUrljson);
-      const metadata = metadataArrary[i];
-      const tokenid = tokenIdArrary[i];
+      const metadata = await response.json();
       const name = metadata.name;
       const image = metadata.image;
       catNFTproperties.push({
-        tokenId: tokenid,
+        tokenId: i,
         name: name,
         image: image,
         attributes: metadata.attributes,
@@ -81,7 +124,7 @@ function Home({ accounts, setAccounts }) {
     }
     setcatNFTproperties(catNFTproperties);
     console.log("catNFTproperties", catNFTproperties);
-  };
+  }
 
   return (
     <div>
@@ -99,9 +142,8 @@ function Home({ accounts, setAccounts }) {
             <Box width="520px">
               {/* 欢迎标题 */}
               <Box id="welcome title" className="home_welcometitle">
-                koko World111
+                koko World
               </Box>
-
               {/* 按钮部分 */}
               <div id="init">
                 <Flex
@@ -111,10 +153,7 @@ function Home({ accounts, setAccounts }) {
                   padding="10px"
                   margin="20px"
                 >
-                  {/* <button onClick={mintClick}>Mint</button>
-
-                  <button onClick={joinClick}>Join</button> */}
-                  <button onClick={mintCatNFT_Onclick}>Deploy NFT</button>
+                  <button onClick={deployCatNFT_Onclick}>Deploy NFT</button>
                   <button onClick={loadBlockchainDataOnclick}>Reflesh</button>
                 </Flex>
               </div>
@@ -157,6 +196,9 @@ function Home({ accounts, setAccounts }) {
         </div>
         {toggle && (
           <NFTDetail
+            provider={provider}
+            kokoTokenContract={kokoTokenContract}
+            catNFTContract={catNFTContract}
             property={property}
             togglePop={togglePop}
             loadBlockchainData={loadBlockchainData}

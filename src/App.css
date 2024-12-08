@@ -137,7 +137,7 @@ body {
 /* properties-container 是外层容器 */ /* properties-container 是外层容器 */
 .properties-container {
   width: 100%;
-  height: 700px; /* 设置固定高度 */
+  height: auto; /* 设置固定高度 */
   box-sizing: border-box;
   overflow-y: auto; /* 启用垂直滚动 */
 }
@@ -161,7 +161,7 @@ body {
 }
 
 .card-wrapper {
-  flex: 1 1 300px; /* 每个卡片最小宽度为 350px，且可以根据屏幕大小调整 */
+  flex: 1 1 350px; /* 每个卡片最小宽度为 350px，且可以根据屏幕大小调整 */
   max-width: 400px;
   display: flex;
   flex-direction: column; /* 设置子项垂直排列 */
@@ -309,7 +309,7 @@ body {
 }
 .nft_overview_input {
   font-family: inherit;
-  width: 190px;
+  width: 200px;
   height: 43px;
   font-size: 13px;
   text-align: center;
