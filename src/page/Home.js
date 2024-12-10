@@ -12,6 +12,7 @@ import {
   Spacer,
 } from "../setting/component";
 import {
+  RPC_URL,
   PRIVATE_KEY0,
   HARDHAT_RPC_URL,
   SEPOLIA_RPC_URL,
@@ -35,7 +36,7 @@ function Home({ accounts, setAccounts }) {
   const [property, setSelectedProperty] = useState({});
   const [toggle, setToggle] = useState(false); // catNFT Property detail 窗口
   var provider;
-  provider = new ethers.providers.JsonRpcProvider(HARDHAT_RPC_URL);
+  provider = new ethers.providers.JsonRpcProvider(RPC_URL);
   // 点击 Mint 按钮时跳转到 /Mint 页面
   const mintClick = () => {
     navigate("/Mint");
@@ -59,24 +60,26 @@ function Home({ accounts, setAccounts }) {
     // await kokoTokenContract.deployTransaction.wait();
     // testcontractAddress = await kokoTokenContract.address;
   }
+
   async function deployCatNFT_Onclick() {
     if (typeof window.ethereum !== "undefined") {
       try {
         const deployNFTReturn = await deployNFT(); // 调用部署函数
-        // setkokoTokenContract(deployNFTReturn.kokoTokenContract);
-        setcatNFTContract(deployNFTReturn);
+        setkokoTokenContract(deployNFTReturn[0]);
+        setcatNFTContract(deployNFTReturn[1]);
         console.log("部署成功～～;", deployNFTReturn);
         // alert("NFT 部署成功！"); // 部署成功提示
       } catch (error) {
         console.error("部署失败：", error);
         alert("部署失败，请检查控制台日志！");
       }
+      // await new Promise((resolve) => setTimeout(resolve, 3000));
     } else {
       alert("MetaMask 未安装，请先安装 MetaMask！");
     }
   }
 
-  // 切换弹出框的状态，并设置当前选中的房产信息
+  // 切换弹出框的状态，并设置当前选中的资产信息
   const togglePop = (property) => {
     setSelectedProperty(property); // 设置选中的房产信息
     setToggle(!toggle); // 切换弹出框状态（显示/隐藏）
@@ -87,7 +90,6 @@ function Home({ accounts, setAccounts }) {
     loadBlockchainData(); // 调用主加载函数
   }
   async function loadBlockchainData() {
-    provider = new ethers.providers.JsonRpcProvider("http://localhost:8545");
     setkokoTokenContract(kokoTokenContract);
     setcatNFTContract(catNFTContract);
 
@@ -108,15 +110,16 @@ function Home({ accounts, setAccounts }) {
     const catNFTproperties = [];
     const totalSupply = await catNFTContract.getTotalMintSupply();
     console.log("totalSupply", totalSupply.toString());
-    for (let i = 0; i < totalSupply; i++) {
+    for (let tokenId = 0; tokenId < totalSupply; tokenId++) {
       // 请求 URI 获取猫猫元数据
-      const tokenUrljson = await catNFTContract.tokenURI(i);
+      const tokenUrljson = await catNFTContract.tokenURI(tokenId);
       const response = await fetch(tokenUrljson);
       const metadata = await response.json();
       const name = metadata.name;
       const image = metadata.image;
+      // 获取 猫猫的捐款总额
       catNFTproperties.push({
-        tokenId: i,
+        tokenId: tokenId,
         name: name,
         image: image,
         attributes: metadata.attributes,
@@ -128,40 +131,39 @@ function Home({ accounts, setAccounts }) {
 
   return (
     <div>
-      {/* 导航栏组件，显示账户相关信息 */}
-      <NavBar accounts={accounts} setAccounts={setAccounts} />
-
-      <ChakraBaseProvider>
-        <div className="home">
-          <Flex
-            justify="center" // 水平居中
-            align="center" // 垂直居中
-            // height="80vh" // 设定容器高度为视口的 80%
-            // paddingBottom="100px" // 下方留白
-          >
-            <Box width="520px">
-              {/* 欢迎标题 */}
-              <Box id="welcome title" className="home_welcometitle">
-                koko World
+      {" "}
+      <div className="home">
+        {/* 导航栏组件，显示账户相关信息 */}
+        <NavBar accounts={accounts} setAccounts={setAccounts} />
+        <ChakraBaseProvider>
+          <div className="home_header">
+            <Flex
+              justify="center" // 水平居中
+              align="center" // 垂直居中
+              // height="80vh" // 设定容器高度为视口的 80%
+              // paddingBottom="100px" // 下方留白
+            >
+              <Box width="520px">
+                {/* 欢迎标题 */}
+                <Box id="welcome title" className="home_welcometitle">
+                  koko World
+                </Box>
+                {/* 按钮部分 */}
+                <div id="init">
+                  <Flex
+                    id="init-input"
+                    align="center" // 垂直居中
+                    justify="center" // 水平居中
+                    padding="10px"
+                    margin="20px"
+                  >
+                    <button onClick={deployCatNFT_Onclick}>Deploy NFT</button>
+                    <button onClick={loadBlockchainDataOnclick}>Reflesh</button>
+                  </Flex>
+                </div>
               </Box>
-              {/* 按钮部分 */}
-              <div id="init">
-                <Flex
-                  id="init-input"
-                  align="center" // 垂直居中
-                  justify="center" // 水平居中
-                  padding="10px"
-                  margin="20px"
-                >
-                  <button onClick={deployCatNFT_Onclick}>Deploy NFT</button>
-                  <button onClick={loadBlockchainDataOnclick}>Reflesh</button>
-                </Flex>
-              </div>
-            </Box>
-          </Flex>
-          {/* <Text>NFT list</Text>
-
-          <Box padding="20px">nft1</Box> */}
+            </Flex>
+          </div>
           <h3 className="title">Properties For Donation</h3> <hr />
           <div className="properties-container">
             <div className="cards-container">
@@ -179,7 +181,7 @@ function Home({ accounts, setAccounts }) {
                       <img src={property.image} />
                     </div>
                   </div>{" "}
-                  <div className="card-detail">
+                  <div className="card_info">
                     <p>
                       <strong>Chip ID: {property.attributes[0]?.value}</strong>
                     </p>
@@ -193,18 +195,18 @@ function Home({ accounts, setAccounts }) {
               ))}
             </div>
           </div>
-        </div>
-        {toggle && (
-          <NFTDetail
-            provider={provider}
-            kokoTokenContract={kokoTokenContract}
-            catNFTContract={catNFTContract}
-            property={property}
-            togglePop={togglePop}
-            loadBlockchainData={loadBlockchainData}
-          />
-        )}
-      </ChakraBaseProvider>
+          {toggle && (
+            <NFTDetail
+              provider={provider}
+              kokoTokenContract={kokoTokenContract}
+              catNFTContract={catNFTContract}
+              property={property}
+              togglePop={togglePop}
+              loadBlockchainData={loadBlockchainData}
+            />
+          )}
+        </ChakraBaseProvider>{" "}
+      </div>
     </div>
   );
 }

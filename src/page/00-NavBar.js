@@ -64,7 +64,8 @@ const NavBar = ({ accounts, setAccounts }) => {
             width="40%"
             padding="0 40px"
           >
-            <button margin="0 15px" onClick={homeClick}>
+            <button onClick={homeClick}>
+              <Spacer />
               Home
             </button>
             {isConnected ? (

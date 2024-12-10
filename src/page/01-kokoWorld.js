@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import {
   ChakraBaseProvider,
-  Box,
+  div,
   Text,
   Input,
   Button,
@@ -102,127 +102,99 @@ function Kokoworld({ accounts, setAccounts }) {
   }
 
   return (
-    <div style={{ height: "100vh", overflowY: "auto" }}>
+    <div className="kokoDao">
       {/* 导航栏组件 */}
       <NavBar accounts={accounts} setAccounts={setAccounts} />
       <ChakraBaseProvider>
-        {/* 页面布局 */}
-        <Flex
-          justify="center" // 居中对齐
-        >
-          {/* 提案数据展示组件 */}
-          <ProposalData />
-          <div className="run-Dao">
-            <Box width="900px" margin="50px 0px">
-              <Box id="DAO_title" margin="auto">
-                <Text fontSize="40px">kokoWorld DAO!!</Text>
-                <Text
-                  fontSize="33px"
-                  letterSpacing="-5.5%" // 字间距
-                  fontFamily="VT323" // 字体
-                  textShadow="0 2px 2px #000000"
-                >
-                  It's 2077, bala bala ...
-                </Text>
-              </Box>
+        <div className="kokoDao_container">
+          <div className="kokoDao_proposallist">
+            {/* 提案数据展示组件 */}
+            <ProposalData />
+          </div>
+          <div className="kokoDao_operate">
+            <div id="DAO_title" margin="auto">
+              <Text fontSize="40px">kokoWorld DAO!!</Text>
+              <Text
+                fontSize="33px"
+                letterSpacing="-5.5%" // 字间距
+                fontFamily="VT323" // 字体
+                textShadow="0 2px 2px #000000"
+              >
+                It's 2077, bala bala ...
+              </Text>
+            </div>
+            <div className="kokoDao_deploy">
               {/* deploy 按钮 */}
               <button onClick={deployOnclick}>deploy</button>
-              {/* 提案部分 */}
-              <div id="propose">
-                <Flex
-                  id="propose-input"
-                  align="center"
-                  justify="center"
-                  padding="20px 30px"
-                  textColor="black"
-                >
-                  {/* 提案目标地址输入框 */}
-                  <Input
-                    type="text"
-                    value={inputValue1}
-                    onChange={(e) => setInputValue1(e.target.value)}
-                    placeholder={"proposal exe"}
-                  ></Input>
-                  {/* 提案值输入框 */}
-                  <Input
-                    type="text"
-                    value={inputValue2}
-                    onChange={(e) => setInputValue2(e.target.value)}
-                    placeholder={"proposal value"}
-                  ></Input>
-                  {/* 提案描述输入框 */}
-                  <Input
-                    type="text"
-                    defaultValue={inputValue3}
-                    onChange={(e) => setInputValue3(e.target.value)}
-                  ></Input>
-                </Flex>
-                {/* 提案按钮 */}
-                <button id="propose-button" onClick={proposeOnclick}>
-                  propose
-                </button>
+            </div>
+            {/* 提案部分 */}
+            <div className="kokoDao_propose">
+              <div className="propose-input">
+                <input
+                  type="text"
+                  value={inputValue1}
+                  onChange={(e) => setInputValue1(e.target.value)}
+                  placeholder={"proposal exe"}
+                ></input>
+                <input
+                  type="text"
+                  value={inputValue2}
+                  onChange={(e) => setInputValue2(e.target.value)}
+                  placeholder={"proposal value"}
+                ></input>
+                <input
+                  type="text"
+                  defaultValue={inputValue3}
+                  onChange={(e) => setInputValue3(e.target.value)}
+                ></input>
               </div>
-              {/* 投票部分 */}
-              <div id="vote">
-                <Flex
-                  id="propose-input"
-                  align="center"
-                  justify="center"
-                  padding="20px 30px"
-                  textColor="black"
-                >
-                  {/* 提案 ID 输入框 */}
-                  <Input
-                    type="text"
-                    defaultValue={proposalidInput}
-                    onChange={(e) => setproposalidInput(e.target.value)}
-                    placeholder={"proposal Id"}
-                  ></Input>
-                  {/* 支持选项输入框 */}
-                  <Input
-                    type="number"
-                    defaultValue={supportInput}
-                    onChange={(e) => setsupportInput(e.target.value)}
-                    placeholder={"support"}
-                  ></Input>
-                  {/* 投票账户编号输入框 */}
-                  <Input
-                    type="number"
-                    defaultValue={accountNumberInput}
-                    onChange={(e) => setaccountNumberInput(e.target.value)}
-                    placeholder={"0"}
-                  ></Input>
-                </Flex>
-                {/* 投票按钮 */}
-                <button id="vote-button" onClick={voteOnclick}>
-                  vote
-                </button>
+              <button id="propose-button" onClick={proposeOnclick}>
+                propose
+              </button>
+            </div>
+            {/* 投票部分 */}
+            <div className="kokoDao_vote">
+              <div className="propose-input">
+                <input
+                  type="text"
+                  defaultValue={proposalidInput}
+                  onChange={(e) => setproposalidInput(e.target.value)}
+                  placeholder={"proposal Id"}
+                ></input>
+                <input
+                  type="number"
+                  defaultValue={supportInput}
+                  onChange={(e) => setsupportInput(e.target.value)}
+                  placeholder={"support"}
+                ></input>
+                <input
+                  type="number"
+                  defaultValue={accountNumberInput}
+                  onChange={(e) => setaccountNumberInput(e.target.value)}
+                  placeholder={"0"}
+                ></input>
               </div>
-              {/* 提案执行部分 */}
-              <div id="execute">
-                <Flex
-                  id="propose-input"
-                  align="center"
-                  justify="center"
-                  padding="20px 30px"
-                  textColor="black"
-                >
-                  {/* 提案执行 ID 输入框 */}
-                  <Input
-                    type="text"
-                    defaultValue={executeProposalIdInput}
-                    onChange={(e) => setexecuteProposalIdInput(e.target.value)}
-                    placeholder={"execute ProposalId"}
-                  ></Input>
-                </Flex>
-                {/* 执行按钮 */}
-                <button id="execute-button" onClick={executeOnclick}>
-                  execute
-                </button>
+              <button id="vote-button" onClick={voteOnclick}>
+                vote
+              </button>
+            </div>
+            {/* 执行部分 */}
+            <div className="kokoDao_execute">
+              <div className="execute-input">
+                <input
+                  type="text"
+                  defaultValue={executeProposalIdInput}
+                  onChange={(e) => setexecuteProposalIdInput(e.target.value)}
+                  placeholder={"execute ProposalId"}
+                ></input>
               </div>
-            </Box>
+              {/* 执行按钮 */}
+              <button className="execute-button" onClick={executeOnclick}>
+                execute
+              </button>
+            </div>
           </div>
-        </Flex>
+        </div>
       </ChakraBaseProvider>
     </div>
   );

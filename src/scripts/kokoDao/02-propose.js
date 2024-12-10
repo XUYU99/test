@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { ethers } from "ethers";
-// import * as XLSX from "xlsx";
-// import * as fs from "fs";
+
 import {
   contractArray,
   kokoTokenContract,

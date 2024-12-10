@@ -1,6 +1,7 @@
 import "../../App.css";
 import { ethers } from "ethers";
 import {
+  RPC_URL,
   HARDHAT_RPC_URL,
   PRIVATE_KEY0,
   SEPOLIA_RPC_URL,
@@ -15,15 +16,15 @@ tokenIdArrary = [];
  * 部署合约函数
  */
 async function deployNFT() {
-  const provider = new ethers.providers.JsonRpcProvider(HARDHAT_RPC_URL);
-  const signer = new ethers.Wallet(PRIVATE_KEY0, provider);
-  const signerAddress = signer.address;
-  console.log("signer", signerAddress);
+  const provider = new ethers.providers.JsonRpcProvider(RPC_URL);
+  const account01 = new ethers.Wallet(PRIVATE_KEY0, provider);
+  const account01Address = account01.address;
+  console.log("account01 address", account01Address);
   console.log(`-----------01 deploy kokoToken--------------`);
   const kokoTokenfactory = new ethers.ContractFactory(
     kokoToken.abi,
     kokoToken.bytecode,
-    signer
+    account01
   );
   // 部署 kokoToken 合约, 并挖了100个koko币
   kokoTokenContract = await kokoTokenfactory.deploy("koko", "KO");
@@ -35,11 +36,11 @@ async function deployNFT() {
   const testfactory = new ethers.ContractFactory(
     kokoCatNFT.abi,
     kokoCatNFT.bytecode,
-    signer
+    account01
   );
   catNFTContract = await testfactory.deploy(
-    signerAddress,
-    signerAddress,
+    account01Address,
+    account01Address,
     kokoTokenAddress
   );
   await catNFTContract.deployTransaction.wait();
@@ -48,7 +49,10 @@ async function deployNFT() {
   for (let i = 1; i <= 8; i++) {
     // mint NFT 并设置 tokenURI
     const tokenUrljson = `https://maroon-elegant-mongoose-836.mypinata.cloud/ipfs/bafybeifxa7ke4dqimvvhdj5rchgtuse7ti3o5czhdevs26ux4pmczhdrbq/${i}.json`;
-    const mintTx = await catNFTContract.safeMint(signerAddress, tokenUrljson);
+    const mintTx = await catNFTContract.safeMint(
+      account01Address,
+      tokenUrljson
+    );
     await mintTx.wait();
     const tokenId = await catNFTContract.getTokenId();
     console.log("Mint successful, tokenId: ", tokenId.toString());
@@ -89,7 +93,7 @@ async function deployNFT() {
   }
   // console.log("metadataArrary: ", metadataArrary);
   console.log("tokenIdArrary: ", tokenIdArrary);
-  return catNFTContract;
+  return [kokoTokenContract, catNFTContract];
   // 设置 猫猫信息
   // uint256 tokenId,string memory _name,uint256 _chipId,uint256 _birthDate,uint256 _age,bool _sex,string memory _breed
   // const _name = "neow";

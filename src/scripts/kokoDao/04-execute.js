@@ -1,7 +1,11 @@
 import { ethers } from "ethers";
 import { moveBlocks, xytGovernorContract, BoxContract } from "./01-deploy.js";
 import { calldata, description, proposeLog } from "./02-propose.js";
-import { PRIVATE_KEY0, HARDHAT_RPC_URL } from "../../setting/accountSetting.js";
+import {
+  RPC_URL,
+  PRIVATE_KEY0,
+  HARDHAT_RPC_URL,
+} from "../../setting/accountSetting.js";
 
 /**
  * 执行提案
@@ -9,7 +13,7 @@ import { PRIVATE_KEY0, HARDHAT_RPC_URL } from "../../setting/accountSetting.js";
  */
 async function execute(executeProposalIdInput) {
   // 初始化 provider 和 signer
-  const provider = new ethers.providers.JsonRpcProvider(HARDHAT_RPC_URL);
+  const provider = new ethers.providers.JsonRpcProvider(RPC_URL);
   const signer = new ethers.Wallet(PRIVATE_KEY0, provider);
   const signerAddress = signer.address;
 

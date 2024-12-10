@@ -1,6 +1,10 @@
 import "../../App.css";
 import { ethers } from "ethers";
-import { PRIVATE_KEY0, HARDHAT_RPC_URL } from "../../setting/accountSetting";
+import {
+  RPC_URL,
+  PRIVATE_KEY0,
+  HARDHAT_RPC_URL,
+} from "../../setting/accountSetting";
 import kokoToken from "../../artifacts/contracts/kokoDao/kokoToken.sol/kokoToken.json";
 import TimeLock from "../../artifacts/contracts/kokoDao/TimeLock.sol/TimeLock.json";
 import xytGovernor from "../../artifacts/contracts/kokoDao/xytGovernor.sol/xytGovernor.json";
@@ -18,11 +22,11 @@ export var contractArray,
  * 部署合约函数
  */
 async function deploy() {
-  const provider = new ethers.providers.JsonRpcProvider(HARDHAT_RPC_URL);
+  const provider = new ethers.providers.JsonRpcProvider(RPC_URL);
   const signer = new ethers.Wallet(PRIVATE_KEY0, provider);
   const signerAddress = signer.address;
   console.log("signer", signerAddress);
-  console.log(`--------------01-deploy----------------`);
+  console.log(`--------------01-deploy-Dao---------------`);
 
   // 根据索引部署 kokoToken TimeLock xytGovernor 合约
   const contracts = [kokoToken, TimeLock, xytGovernor];
@@ -80,12 +84,27 @@ async function deploy() {
   BoxContract = await boxFactory.deploy(signerAddress);
   await BoxContract.deployTransaction.wait();
   const boxAddress = BoxContract.address;
-  console.log(`box 合约 部署在 ${boxAddress}`);
+  console.log(`box1 合约 部署在 ${boxAddress}`);
 
   BoxContract2 = await boxFactory.deploy(signerAddress);
   await BoxContract2.deployTransaction.wait();
   boxAddress22 = BoxContract2.address;
   console.log(`box2 合约 部署在 ${boxAddress22}`);
+
+  const BoxContract3 = await boxFactory.deploy(signerAddress);
+  await BoxContract3.deployTransaction.wait();
+  const boxAddress33 = BoxContract3.address;
+  console.log(`box3 合约 部署在 ${boxAddress33}`);
+
+  const BoxContract4 = await boxFactory.deploy(signerAddress);
+  await BoxContract4.deployTransaction.wait();
+  const boxAddress44 = BoxContract2.address;
+  console.log(`box4 合约 部署在 ${boxAddress44}`);
+
+  const BoxContract5 = await boxFactory.deploy(signerAddress);
+  await BoxContract5.deployTransaction.wait();
+  const boxAddress55 = BoxContract2.address;
+  console.log(`box5 合约 部署在 ${boxAddress55}`);
 
   // 设置 xytGovernor 的权限
   await kokoTokenContract.delegate(signerAddress); // 将投票权委托给部署者
@@ -123,7 +142,7 @@ async function deploy() {
  */
 export async function moveBlocks(amount) {
   for (let i = 0; i < amount; i++) {
-    const provider = new ethers.providers.JsonRpcProvider(HARDHAT_RPC_URL);
+    const provider = new ethers.providers.JsonRpcProvider(RPC_URL);
 
     await provider.send("evm_mine", []); // 使用 provider.send 发送矿块请求
   }

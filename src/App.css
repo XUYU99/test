@@ -8,7 +8,7 @@
   --clr-blue: #6c63ff;
   --clr-blue-2: #4c46b6;
   --clr-pink: #d6517d;
-  --clr-pink-2: #cb3b6b;
+  --clr-pink-2: #b4345f;
   --clr-black: #000000;
 }
 .App {
@@ -59,7 +59,7 @@ body {
   background-position: 40% 40%;
 }
 .pink_button {
-  background-color: #d6517d;
+  background-color: var(--clr-pink);
   border-radius: 5px;
   color: white;
   cursor: pointer;
@@ -72,8 +72,13 @@ body {
   width: 20px;
   height: 20px;
 }
-.home button {
-  background-color: #d6517d;
+.home {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.home_header button {
+  background-color: var(--clr-pink);
   border-radius: 5px;
   box-shadow: 0px 2px 2px 1px var(--clr-black);
   color: white;
@@ -87,67 +92,15 @@ body {
   font-size: 40px;
   text-shadow: 0 5px #000000;
 }
-
-.run-Dao button {
-  background-color: var(--clr-pink);
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  font-size: 15px;
-  padding: 8px 15px;
-  margin: 30px;
-}
-
-.run-Dao button:hover {
-  background-color: var(--clr-pink-2);
-  box-shadow: 1px 1px 5px var(--clr-grey);
-}
-
-.run-Dao input {
-  font-family: inherit;
-  width: 190px;
-  height: 43px;
-  font-size: 13px;
-  text-align: center;
-  padding: 10px;
-  margin: 0 15px;
-}
-
-.mintpage button {
-  background-color: #d6517d;
-  border-radius: 5px;
-  box-sizing: 0px 2px 2px 1px var(--clr-black);
-  color: white;
-  cursor: pointer;
-  font-size: inherit;
-  padding: 10px;
-  margin: 0 15px;
-}
-.mintpage input {
-  font-family: inherit;
-  width: 230px;
-  height: 30px;
-  text-align: center;
-  padding: 18px;
-  margin: 10px;
-}
-
 /* Home NFT 信息 */
 /* --------------- */
-/* properties-container 是外层容器 */ /* properties-container 是外层容器 */
+/* properties-container 是外层容器 */
 .properties-container {
   width: 100%;
-  height: auto; /* 设置固定高度 */
+  height: calc(80vh - 30px); /* 假设 header 高度是 50px */
   box-sizing: border-box;
+  flex: 1; /* 使其占据父容器剩余空间 */
   overflow-y: auto; /* 启用垂直滚动 */
-}
-
-.title {
-  font-size: 1.8rem;
-  font-weight: bold;
-  font-size: 20px;
-  margin-bottom: 10px;
-  color: #ffffff;
 }
 
 .cards-container {
@@ -218,7 +171,7 @@ body {
   object-fit: contain; /* 保持比例，容器填充 */
   border-radius: 8px;
 }
-.card-detail {
+.card_info {
   background-color: #f9aeae;
   width: 95%;
   margin: 10px;
@@ -244,11 +197,47 @@ body {
     flex: 1 1 100%; /* 在小屏设备上，卡片占满整个宽度 */
   }
 }
-/* ----------------- */
+
+.run-Dao input {
+  font-family: inherit;
+  width: 190px;
+  height: 43px;
+  font-size: 13px;
+  text-align: center;
+  padding: 10px;
+  margin: 0 15px;
+}
+
+.mintpage button {
+  background-color: #d6517d;
+  border-radius: 5px;
+  box-sizing: 0px 2px 2px 1px var(--clr-black);
+  color: white;
+  cursor: pointer;
+  font-size: inherit;
+  padding: 10px;
+  margin: 0 15px;
+}
+.mintpage input {
+  font-family: inherit;
+  width: 230px;
+  height: 30px;
+  text-align: center;
+  padding: 18px;
+  margin: 10px;
+}
+.title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
 /* ------------------------------------------------------ */
 /* -- NFT Card Detail -- */
 
-.nft {
+.nftDetail {
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -258,7 +247,7 @@ body {
   z-index: 3;
 }
 
-.nft__details {
+.nftDetail__details {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
   align-items: center;
@@ -276,16 +265,16 @@ body {
   flex-direction: column; /* 设置子项垂直排列 */
 }
 
-.nft__image {
+.nftDetail__image {
   max-width: 500px;
   padding: 15px;
 }
 
-.nft__image img {
+.nftDetail__image img {
   max-width: 100%;
 }
 
-.nft__close {
+.nftDetail__close {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -295,19 +284,19 @@ body {
   color: #7a7979;
 }
 
-.nft__close img {
+.nftDetail__close img {
   width: 25px;
   height: 25px;
 }
 
-.nft__overview {
+.nftDetail__overview {
   height: 100%;
   font-size: 15px;
-  color: #626161;
+  color: #717070;
   margin: 0 20px;
   overflow-y: scroll;
 }
-.nft_overview_input {
+.nftDetail_overview_input {
   font-family: inherit;
   width: 200px;
   height: 43px;
@@ -318,29 +307,113 @@ body {
   border: 1px solid #c4c4c4; /* 灰色边框 */
   border-radius: 8px; /* 调整弧度，可以根据需要修改 */
 }
-.nft__overview h1 {
+.nftDetail__overview strong {
+  color: #393838;
+}
+.nftDetail__overview h1 {
   font-size: 30px;
   color: #000000;
 }
 
-.nft__overview h2 {
+.nftDetail__overview h2 {
   font-size: 20px;
   color: #000000;
 }
 
-.nft__overview ul {
+.nftDetail__overview ul {
   list-style-type: disc; /* 设置圆点样式，可以是 disc, circle, square 等 */
   padding-left: 20px; /* 确保列表项缩进，圆点位于正确的位置 */
   margin: 20px;
   margin-top: 30px;
 }
 
-.nft__overview ul li {
+.nftDetail__overview ul li {
   margin: 20px 0; /* 仅调整上下间距，避免自动居中 */
   text-align: left; /* 强制文本靠左对齐 */
 }
-.nft__overview h1,
-.nft__overview h2,
-.nft__overview hr {
+.nftDetail__overview h1,
+.nftDetail__overview h2,
+.nftDetail__overview h4,
+.nftDetail__overview hr {
   margin: 20px auto;
+}
+
+/* -----------捐赠 弹窗 loading-----------*/
+
+.loading-overlay {
+  z-index: 4;
+  position: fixed; /* 将覆盖层固定在屏幕上 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
+  font-family: "Press Start 2P", "VT323";
+  display: flex; /* 使用 flexbox */
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+}
+.loading-spinner {
+  background-color: #fff; /* 背景色可以根据需要调整 */
+  padding: 20px;
+  border-radius: 10px; /* 可选，圆角 */
+  color: #333; /* 字体颜色 */
+  display: flex; /* 使用 flexbox */
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  flex-direction: column; /* 垂直排列子元素 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+  animation: fadeIn 0.3s ease-out; /* 弹窗淡入动画 */
+}
+.loading-successmessage {
+  background-color: #fff; /* 背景色可以根据需要调整 */
+  width: auto; /* 容器宽度 */
+  height: auto; /* 容器高度自动适应内容 */
+  border-radius: 10px; /* 圆角 */
+  display: flex; /* 使用 flexbox */
+  flex-direction: column; /* 垂直排列子元素 */
+  justify-content: flex-start; /* 内容从顶部开始排列 */
+  align-items: flex-start; /* 左对齐 */
+  padding: 30px; /* 内边距 */
+}
+.loading-successmessage h2 {
+  font-size: 19px;
+  margin: 10px;
+}
+.loading-successmessage p {
+  font-size: 15px;
+  margin: 10px;
+}
+
+/* 成功消息按钮样式 */
+.successmessage-button {
+  width: 150px;
+  height: 50px;
+  margin: 20px;
+  background-color: var(--clr-pink);
+  color: var(--clr-white);
+  border: none;
+  border-radius: 5px; /* 更圆润的边角 */
+  cursor: pointer;
+  transition: all 250ms ease;
+}
+
+.successmessage-button:hover {
+  background-color: var(--clr-pink-2); /* 按钮悬停效果 */
+}
+
+.successmessage-button:active {
+  transform: scale(0.98); /* 按钮点击时缩放效果 */
+}
+
+/* 弹窗淡入动画 */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import "./kokodao.css";
 import {
   ChakraBaseProvider,
   Box,
@@ -44,9 +45,18 @@ const ProposalData = () => {
 
     // 计算支持、反对和弃权的百分比
     return {
-      support: ((supportStats.support / totalVotes) * 100).toFixed(1) || 0,
-      oppose: ((supportStats.oppose / totalVotes) * 100).toFixed(1) || 0,
-      abstain: ((supportStats.abstain / totalVotes) * 100).toFixed(1) || 0,
+      support:
+        totalVotes > 0
+          ? ((supportStats.support / totalVotes) * 100).toFixed(1)
+          : "0.0",
+      oppose:
+        totalVotes > 0
+          ? ((supportStats.oppose / totalVotes) * 100).toFixed(1)
+          : "0.0",
+      abstain:
+        totalVotes > 0
+          ? ((supportStats.abstain / totalVotes) * 100).toFixed(1)
+          : "0.0",
     };
   };
 
@@ -71,137 +81,74 @@ const ProposalData = () => {
 
   return (
     <div>
-      <ChakraBaseProvider>
-        <Box margin="10px">
+      <div className="proposal-container">
+        <div className="proposal_card_list">
           {proposalDataList.map((proposalData) => {
-            // 获取当前提案的支持统计数据
             const { support, oppose, abstain } = getSupportStatistics(
               proposalData.proposalId
             );
 
             return (
-              <Box
-                key={proposalData.proposalId} // 使用提案 ID 作为唯一键
-                border="1px solid #E2E8F0"
-                borderRadius="md"
-                padding="8px"
-                margin="30px 20px"
-                maxW="380px"
-                // maxH="1000px"
-                boxShadow="md"
-              >
-                {/* 显示提案时间戳 */}
-                <Text fontSize="12px" color="gray.500">
-                  {proposalData.timestamp}
-                </Text>
+              <div key={proposalData.proposalId} className="proposal-card">
+                <p className="proposal-timestamp">{proposalData.timestamp}</p>
 
-                {/* 提案详情，可点击 */}
-                <Button
-                  size="md"
-                  variant="outline"
-                  marginTop="3"
-                  whiteSpace="normal"
-                  wordBreak="break-all"
+                <button
+                  className="proposal-description-btn"
                   onClick={proposalDetailClick}
                 >
                   Proposal Description: {proposalData.description}
-                </Button>
+                </button>
 
-                {/* 显示提案 ID */}
-                <Text fontSize="13px" color="gray.500" marginTop="2">
+                <p className="proposal-id">
                   Proposal ID: {proposalData.proposalId}
-                </Text>
+                </p>
 
-                {/* 提案状态 */}
-                <Text fontSize="sm" color="gray.500" marginTop="2">
-                  ⏰ POLL ENDED
-                </Text>
+                <p className="proposal-status">⏰ POLL ENDED</p>
 
-                {/* 进度条显示支持情况 */}
-                <Flex direction="column" marginTop="1">
-                  <Box
-                    position="relative"
-                    width="100%"
-                    height="10px"
-                    borderRadius="md"
-                    backgroundColor="gray.200"
-                    overflow="hidden"
-                  >
-                    {/* 反对 */}
-                    <Box
-                      position="absolute"
-                      top="0"
-                      left="0"
-                      height="100%"
-                      width={`${oppose}%`}
-                      backgroundColor="red.600"
-                    ></Box>
-                    {/* 支持 */}
-                    <Box
-                      position="absolute"
-                      top="0"
-                      left={`${oppose}%`}
-                      height="100%"
-                      width={`${support}%`}
-                      backgroundColor="blue.600"
-                    ></Box>
-                    {/* 弃权 */}
-                    <Box
-                      position="absolute"
-                      top="0"
-                      right="0"
-                      height="100%"
-                      width={`${abstain}%`}
-                      backgroundColor="yellow.400"
-                    ></Box>
-                  </Box>
+                <div className="progress-bar">
+                  <div
+                    className="progress-bar-oppose"
+                    style={{ width: `${oppose}%` }}
+                  ></div>
+                  <div
+                    className="progress-bar-support"
+                    style={{ width: `${support}%`, left: `${oppose}%` }}
+                  ></div>
+                  <div
+                    className="progress-bar-abstain"
+                    style={{ width: `${abstain}%` }}
+                  ></div>
+                </div>
 
-                  {/* 显示支持统计数据 % */}
-                  <Flex justifyContent="space-between" marginTop="2">
-                    <Text fontSize="sm" color="gray.300">
-                      Support {support}%
-                    </Text>
-                    <Text fontSize="sm" color="gray.300">
-                      Oppose {oppose}%
-                    </Text>
-                    <Text fontSize="sm" color="gray.300">
-                      Abstain {abstain}%
-                    </Text>
-                  </Flex>
-                </Flex>
+                <div className="support-statistics">
+                  <p className="support-statistics-text">Support {support}%</p>
+                  <p className="support-statistics-text">Oppose {oppose}%</p>
+                  <p className="support-statistics-text">Abstain {abstain}%</p>
+                </div>
 
-                {/* 显示交易哈希 */}
-                <Button
-                  size="md"
-                  variant="outline"
-                  marginTop="3"
-                  whiteSpace="normal"
-                  wordBreak="break-all"
-                >
+                <button className="transaction-hash-btn">
                   Transaction Hash:{" "}
                   {proposalData.transactionHash
                     ? proposalData.transactionHash.slice(0, 5) + "..."
                     : ""}
-                </Button>
-              </Box>
+                </button>
+              </div>
             );
           })}
-
-          {/* 刷新按钮 */}
-          <Button
-            fontSize="18px"
-            margin="10px"
+        </div>
+        <div className="refresh_moveblock">
+          <button
+            className="refresh-btn"
             onClick={() => setRefreshFlag((prevFlag) => !prevFlag)}
           >
             Refresh
-          </Button>
+          </button>
 
-          {/* 手动触发 moveBlocks */}
-          <Button fontSize="18px" margin="10px" onClick={moveBlocksOnclick}>
+          <button className="refresh-btn" onClick={moveBlocksOnclick}>
             moveBlocks
-          </Button>
-        </Box>
-      </ChakraBaseProvider>
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

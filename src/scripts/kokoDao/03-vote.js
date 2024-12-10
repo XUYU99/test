@@ -9,6 +9,7 @@ import {
 } from "./01-deploy.js";
 // import { proposalId } from "./02-propose.js";
 import {
+  RPC_URL,
   PRIVATE_KEY0,
   PRIVATE_KEY1,
   PRIVATE_KEY2,
@@ -39,7 +40,7 @@ async function vote(proposalidInput, supportInput, accountNumberInput) {
   const privateKeys = [PRIVATE_KEY0, PRIVATE_KEY1, PRIVATE_KEY2, PRIVATE_KEY3];
 
   // 创建 signer 数组
-  const signers = privateKeys.map((key) => createSigner(HARDHAT_RPC_URL, key));
+  const signers = privateKeys.map((key) => createSigner(RPC_URL, key));
   const signerAddresses = signers.map((signer) => signer.address);
 
   console.log("开始投票...");

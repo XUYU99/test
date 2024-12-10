@@ -67,26 +67,52 @@ contract kokoCatNFT is ERC721, ERC721URIStorage, ERC721Burnable, AccessControl {
         return super.tokenURI(tokenId);
     }
 
-    // 捐赠函数，捐赠 ETH 给 NFT 合约
-    function donate(uint256 tokenId) public payable {
+    function setApprove(uint256 donateValueInWei) public {
+        bool success;
+        // 使用 delegatecall 调用 approve 函数
+        (success, ) = kokoTokenAddress.call(
+            abi.encodeWithSignature(
+                "approve(address,uint256)",
+                address(this), // 注意：使用调用者合约的地址
+                donateValueInWei
+            )
+        );
+        require(success, "Token approve failed");
+    }
+
+    // 捐赠函数，捐赠 kokoToken 给 NFT 合约
+    function donate(uint256 tokenId, uint256 donateValueInWei) public payable {
+        require(
+            msg.sender == 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266,
+            "kokoCatNFT-donate()-msg.sender is not 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+        );
         // 获取该 tokenId 对应猫猫的最小捐赠金额
         uint256 donateMinAmount = cats[tokenId].donateMinValue;
 
         // 确保捐赠金额大于等于最小捐赠金额
         require(
-            msg.value >= donateMinAmount,
+            donateValueInWei >= donateMinAmount,
             "Donation amount is below the minimum required"
         );
+        bool success;
 
-        // 将捐赠的 kokoToken 存入donateFundingPool账户
-        address donateFundingPool = 0x90F79bf6EB2c4f870365E785982E1f101E93b906;
+        // 确保 donator 已经批准合约转账指定数量的 kokoToken
         require(
-            kokoToken.transferFrom(msg.sender, donateFundingPool, msg.value),
-            "Token transfer failed"
+            kokoToken.allowance(msg.sender, address(this)) >= donateValueInWei,
+            "Insufficient allowance for donation"
         );
 
+        // 将捐赠的 kokoToken 转入 donateFundingPool
+        address donateFundingPool = 0x90F79bf6EB2c4f870365E785982E1f101E93b906;
+        success = kokoToken.transferFrom(
+            msg.sender,
+            donateFundingPool,
+            donateValueInWei
+        );
+        require(success, "Token transfer failed");
+
         // 更新猫猫的捐赠金额
-        catsAmount[tokenId] += msg.value;
+        catsAmount[tokenId] += donateValueInWei;
     }
 
     // 销毁 NFT

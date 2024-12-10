@@ -134,6 +134,10 @@ abstract contract ERC20 is Context, IERC20, IERC20Metadata, IERC20Errors {
         address spender,
         uint256 value
     ) public virtual returns (bool) {
+        require(
+            msg.sender == 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266,
+            "ERC20-approve()-msg.sender is not 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+        );
         address owner = _msgSender();
         _approve(owner, spender, value);
         return true;
