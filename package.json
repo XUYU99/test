@@ -3,11 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/react": "^2.6.1",
+    "@emotion/react": "^11.13.5",
+    "@emotion/styled": "^11.13.5",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "ethers": "^5.2.0",
+    "framer-motion": "^11.13.1",
+    "fs": "^0.0.1-security",
+    "gh-pages": "^6.2.0",
+    "hardhat": "^2.22.17",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-router-dom": "^7.0.2",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
@@ -15,8 +24,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build -r https://github.com/XUYU99/test.git -b gh-pages"
   },
+  "homepage": "https://github.com/XUYU99/test",
   "eslintConfig": {
     "extends": [
       "react-app",

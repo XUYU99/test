@@ -1,38 +1,419 @@
+/* @import url("https://fonts.googleapis.com/css?family=Press+Start+2p"); */
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap");
+:root {
+  --clr-white: #ffffff;
+  --clr-black: #202020;
+  --clr-grey: #7a7979;
+  --clr-blue: #6c63ff;
+  --clr-blue-2: #4c46b6;
+  --clr-pink: #d6517d;
+  --clr-pink-2: #b4345f;
+  --clr-black: #000000;
+}
 .App {
   text-align: center;
+  font-family: "Press Start 2P", "VT323";
+  color: white;
+  z-index: 1;
+}
+/* .press-start-2p-regular {
+  font-family: "Press Start 2P", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.vt323-regular {
+  font-family: "VT323", monospace;
+  font-weight: 400;
+  font-style: normal;
+} */
+* {
+  box-sizing: border-box;
+}
+body {
+  overflow: hidden;
+}
+.overlay {
+  /* opacity: 0.85; */
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  position: fixed;
+  /* pointer-events: none; */
+}
+.moving-background {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background-image: url("./picture/Falling\ words.jpeg"); */
+  background-image: url("./picture/blackground.png");
+  /* background-image: url("./picture/Falling\ words.gif"); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 40% 40%;
+}
+.pink_button {
+  background-color: var(--clr-pink);
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 15px;
+  margin: 0 15px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.logo-Address {
+  width: 20px;
+  height: 20px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.home {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  height: 100vh;
+}
+.home_header button {
+  background-color: var(--clr-pink);
+  border-radius: 5px;
+  box-shadow: 0px 2px 2px 1px var(--clr-black);
   color: white;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 15px;
+  margin: 0 15px;
+}
+.home_welcometitle {
+  margin: 20px;
+  font-size: 40px;
+  text-shadow: 0 5px #000000;
+}
+/* Home NFT 信息 */
+/* --------------- */
+/* properties-container 是外层容器 */
+.properties-container {
+  width: 100%;
+  height: calc(80vh - 30px); /* 假设 header 高度是 50px */
+  box-sizing: border-box;
+  flex: 1; /* 使其占据父容器剩余空间 */
+  overflow-y: auto; /* 启用垂直滚动 */
 }
 
-.App-link {
-  color: #61dafb;
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 40px;
+  justify-content: flex-start; /* 确保卡片从左到右排列 */
+  justify-content: center; /* 确保卡片在水平方向居中 */
+  align-items: center; /* 确保卡片在垂直方向居中 */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.card-wrapper {
+  flex: 1 1 350px; /* 每个卡片最小宽度为 350px，且可以根据屏幕大小调整 */
+  max-width: 400px;
+  display: flex;
+  flex-direction: column; /* 设置子项垂直排列 */
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  box-sizing: border-box; /* 防止 padding 影响布局 */
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  width: 80%;
+  height: 85%;
+  text-align: center;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column; /* 设置子项垂直排列 */
+}
+
+.card:hover {
+  transform: translateY(-10px); /* 卡片悬浮效果 */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 固定 card-title 高度为 50px */
+.card-title {
+  color: #202020;
+  height: 30px; /* 固定高度 */
+  margin-top: 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+}
+
+.card-image {
+  width: 100%;
+  height: 100%; /* 固定高度为100% */
+  padding: 20px;
+  flex-grow: 1; /* 使 .card-image 占据剩余空间 */
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* 使用 flexbox 居中图片 */
+  overflow: hidden; /* 防止溢出 */
+}
+
+.card-image img {
+  width: auto; /* 图片宽度根据内容大小变化 */
+  height: 100%; /* 高度填充为100% */
+  object-fit: contain; /* 保持比例，容器填充 */
+  border-radius: 8px;
+}
+.card_info {
+  background-color: #f9aeae;
+  width: 95%;
+  margin: 10px;
+  padding: 10px;
+
+  border-radius: 10px;
+  font-size: 16px;
+  text-align: center;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column; /* 设置子项垂直排列 */
+}
+.card-detail p {
+  margin: 5px;
+}
+/* 响应式布局 */
+@media (max-width: 768px) {
+  .cards-container {
+    justify-content: center;
   }
-  to {
-    transform: rotate(360deg);
+
+  .card-wrapper {
+    flex: 1 1 100%; /* 在小屏设备上，卡片占满整个宽度 */
+  }
+}
+
+.run-Dao input {
+  font-family: inherit;
+  width: 190px;
+  height: 43px;
+  font-size: 13px;
+  text-align: center;
+  padding: 10px;
+  margin: 0 15px;
+}
+
+.mintpage button {
+  background-color: #d6517d;
+  border-radius: 5px;
+  box-sizing: 0px 2px 2px 1px var(--clr-black);
+  color: white;
+  cursor: pointer;
+  font-size: inherit;
+  padding: 10px;
+  margin: 0 15px;
+}
+.mintpage input {
+  font-family: inherit;
+  width: 230px;
+  height: 30px;
+  text-align: center;
+  padding: 18px;
+  margin: 10px;
+}
+.title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+/* ------------------------------------------------------ */
+/* -- NFT Card Detail -- */
+
+.nftDetail {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+
+.nftDetail__details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+  align-items: center;
+  width: 80%;
+  height: 70%;
+  margin: 0 auto;
+  padding: 20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background: var(--clr-white);
+  overflow: hidden;
+  flex-direction: column; /* 设置子项垂直排列 */
+}
+
+.nftDetail__image {
+  max-width: 500px;
+  padding: 15px;
+}
+
+.nftDetail__image img {
+  max-width: 100%;
+}
+
+.nftDetail__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  color: #7a7979;
+}
+
+.nftDetail__close img {
+  width: 25px;
+  height: 25px;
+}
+
+.nftDetail__overview {
+  height: 100%;
+  font-size: 15px;
+  color: #717070;
+  margin: 0 20px;
+  overflow-y: scroll;
+}
+.nftDetail_overview_input {
+  font-family: inherit;
+  width: 200px;
+  height: 43px;
+  font-size: 13px;
+  text-align: center;
+  padding: 10px;
+  margin: 0 15px;
+  border: 1px solid #c4c4c4; /* 灰色边框 */
+  border-radius: 8px; /* 调整弧度，可以根据需要修改 */
+}
+.nftDetail__overview strong {
+  color: #393838;
+}
+.nftDetail__overview h1 {
+  font-size: 30px;
+  color: #000000;
+}
+
+.nftDetail__overview h2 {
+  font-size: 20px;
+  color: #000000;
+}
+
+.nftDetail__overview ul {
+  list-style-type: disc; /* 设置圆点样式，可以是 disc, circle, square 等 */
+  padding-left: 20px; /* 确保列表项缩进，圆点位于正确的位置 */
+  margin: 20px;
+  margin-top: 30px;
+}
+
+.nftDetail__overview ul li {
+  margin: 20px 0; /* 仅调整上下间距，避免自动居中 */
+  text-align: left; /* 强制文本靠左对齐 */
+}
+.nftDetail__overview h1,
+.nftDetail__overview h2,
+.nftDetail__overview h4,
+.nftDetail__overview hr {
+  margin: 20px auto;
+}
+
+/* -----------捐赠 弹窗 loading-----------*/
+
+.loading-overlay {
+  z-index: 4;
+  position: fixed; /* 将覆盖层固定在屏幕上 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
+  font-family: "Press Start 2P", "VT323";
+  display: flex; /* 使用 flexbox */
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+}
+.loading-spinner {
+  background-color: #fff; /* 背景色可以根据需要调整 */
+  padding: 20px;
+  border-radius: 10px; /* 可选，圆角 */
+  color: #333; /* 字体颜色 */
+  display: flex; /* 使用 flexbox */
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  flex-direction: column; /* 垂直排列子元素 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+  animation: fadeIn 0.3s ease-out; /* 弹窗淡入动画 */
+}
+.loading-successmessage {
+  background-color: #fff; /* 背景色可以根据需要调整 */
+  width: auto; /* 容器宽度 */
+  height: auto; /* 容器高度自动适应内容 */
+  border-radius: 10px; /* 圆角 */
+  display: flex; /* 使用 flexbox */
+  flex-direction: column; /* 垂直排列子元素 */
+  justify-content: flex-start; /* 内容从顶部开始排列 */
+  align-items: flex-start; /* 左对齐 */
+  padding: 30px; /* 内边距 */
+}
+.loading-successmessage h2 {
+  font-size: 19px;
+  margin: 10px;
+}
+.loading-successmessage p {
+  font-size: 15px;
+  margin: 10px;
+}
+
+/* 成功消息按钮样式 */
+.successmessage-button {
+  width: 150px;
+  height: 50px;
+  margin: 20px;
+  background-color: var(--clr-pink);
+  color: var(--clr-white);
+  border: none;
+  border-radius: 5px; /* 更圆润的边角 */
+  cursor: pointer;
+  transition: all 250ms ease;
+}
+
+.successmessage-button:hover {
+  background-color: var(--clr-pink-2); /* 按钮悬停效果 */
+}
+
+.successmessage-button:active {
+  transform: scale(0.98); /* 按钮点击时缩放效果 */
+}
+
+/* 弹窗淡入动画 */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
