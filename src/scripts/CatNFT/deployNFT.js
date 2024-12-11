@@ -91,32 +91,8 @@ async function deployNFT() {
     metadataArrary.push(metadata);
     tokenIdArrary.push(tokenId);
   }
-  // console.log("metadataArrary: ", metadataArrary);
   console.log("tokenIdArrary: ", tokenIdArrary);
   return [kokoTokenContract, catNFTContract];
-  // 设置 猫猫信息
-  // uint256 tokenId,string memory _name,uint256 _chipId,uint256 _birthDate,uint256 _age,bool _sex,string memory _breed
-  // const _name = "neow";
-  // const _chipId = "2763";
-  // const _birthDate = 20190109;
-  // const _age = 6;
-  // const _sex = 1;
-  // const _breed = "British shorthair";
-  // const addCatTx = await catNFTContract.addCat(
-  //   tokenId,
-  //   _name,
-  //   _chipId,
-  //   _birthDate,
-  //   _age,
-  //   _sex,
-  //   _breed
-  // );
-  // const response = await addCatTx.wait();
-  // console.log("addCat successful, response: ", response);
-
-  // const getCatTx = await catNFTContract.getCat(tokenId);
-  // console.log("addCat successful, response: ", getCatTx.toString());
-  // return getCatTx;
 }
 
 export default deployNFT;

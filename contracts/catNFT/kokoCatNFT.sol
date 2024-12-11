@@ -82,10 +82,6 @@ contract kokoCatNFT is ERC721, ERC721URIStorage, ERC721Burnable, AccessControl {
 
     // 捐赠函数，捐赠 kokoToken 给 NFT 合约
     function donate(uint256 tokenId, uint256 donateValueInWei) public payable {
-        require(
-            msg.sender == 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266,
-            "kokoCatNFT-donate()-msg.sender is not 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
-        );
         // 获取该 tokenId 对应猫猫的最小捐赠金额
         uint256 donateMinAmount = cats[tokenId].donateMinValue;
 
@@ -103,7 +99,9 @@ contract kokoCatNFT is ERC721, ERC721URIStorage, ERC721Burnable, AccessControl {
         );
 
         // 将捐赠的 kokoToken 转入 donateFundingPool
-        address donateFundingPool = 0x90F79bf6EB2c4f870365E785982E1f101E93b906;
+        // address donateFundingPool = 0x90F79bf6EB2c4f870365E785982E1f101E93b906; // hardhat
+        address donateFundingPool = 0x3c86B2D477B07E8984802F8dDF9a9d58131ceDcB; // sepolia
+
         success = kokoToken.transferFrom(
             msg.sender,
             donateFundingPool,
@@ -167,6 +165,18 @@ contract kokoCatNFT is ERC721, ERC721URIStorage, ERC721Burnable, AccessControl {
     ) public view returns (Property memory) {
         Property memory cat = cats[tokenId];
         return cat;
+    }
+
+    // 提取合约中的 ETH
+    function withdraw(
+        uint256 amount,
+        address payable to
+    ) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        require(
+            address(this).balance >= amount,
+            "Insufficient balance in the contract"
+        );
+        to.transfer(amount);
     }
 
     //  检查合约是否支持某个特定的接口

@@ -25,7 +25,7 @@ import deployNFT, {
   metadataArrary,
   tokenIdArrary,
 } from "../scripts/CatNFT/deployNFT";
-import NFTDetail from "./catNFT-detail";
+import NFTDetail from "./catNFT/catNFT-detail";
 import kokoCatNFT from "../artifacts/contracts/catNFT/kokoCatNFT.sol/kokoCatNFT.json";
 
 function Home({ accounts, setAccounts }) {
@@ -45,21 +45,6 @@ function Home({ accounts, setAccounts }) {
   const joinClick = () => {
     navigate("/Koko");
   };
-
-  async function mintKokoTokenOnclick() {
-    // const miner = new ethers.Wallet(PRIVATE_KEY0, provider);
-    // const minerAddress = miner.address;
-    // console.log("miner Address:", minerAddress);
-    // const testfactory = new ethers.ContractFactory(
-    //   kokoToken.abi,
-    //   kokoToken.bytecode,
-    //   signer
-    // );
-    // // 部署 kokoToken 合约, 并挖了100个koko币
-    // kokoTokenContract = await testfactory.deploy("koko", "KO");
-    // await kokoTokenContract.deployTransaction.wait();
-    // testcontractAddress = await kokoTokenContract.address;
-  }
 
   async function deployCatNFT_Onclick() {
     if (typeof window.ethereum !== "undefined") {
@@ -89,24 +74,68 @@ function Home({ accounts, setAccounts }) {
   function loadBlockchainDataOnclick() {
     loadBlockchainData(); // 调用主加载函数
   }
+
+  const getBalanceOnclick = async () => {
+    const network = await provider.getNetwork();
+    console.log("Network : ", network);
+    const catNFTContractAddress = "0x1f3c949c986b7fdD5e7CfB6836a3b457331626e8";
+    const catNFTContract = new ethers.Contract(
+      catNFTContractAddress,
+      kokoCatNFT.abi,
+      provider
+    );
+    const account01 = new ethers.Wallet(PRIVATE_KEY0, provider);
+    let getBalanceAddress = "0x1f3c949c986b7fdD5e7CfB6836a3b457331626e8";
+    let balance = await provider.getBalance(getBalanceAddress);
+    console.log(
+      getBalanceAddress,
+      " balance :",
+      ethers.utils.formatUnits(balance.toString(), 18)
+    );
+
+    const contractBalance = await provider.getBalance(catNFTContract.address);
+    console.log(
+      "Contract Balance (ETH):",
+      ethers.utils.formatEther(contractBalance)
+    );
+
+    // 使用合约的 withdraw 函数取出余额
+    const withdrawTx = await catNFTContract.withdraw(
+      ethers.utils.parseEther("2"), // 提取金额
+      "0xe409121c12E6d748d29c132BE68552Bdc8162a81" // 提取目标地址
+    );
+    await withdrawTx.wait();
+    console.log("Withdrawal successful");
+
+    balance = await provider.getBalance(getBalanceAddress);
+    console.log(
+      "after withdraw,",
+      getBalanceAddress,
+      " balance :",
+      ethers.utils.formatUnits(balance.toString(), 18)
+    );
+  };
+
   async function loadBlockchainData() {
+    const network = await provider.getNetwork();
+    console.log("Network : ", network);
+    // sepolia 版本
+    const kokoTokenAddress = "0x424bbdA9cF5d1e238ade4b8CDFd7FF55A8f9F928";
+    const kokoTokenContract = new ethers.Contract(
+      kokoTokenAddress,
+      kokoCatNFT.abi,
+      provider
+    );
+    setkokoTokenContract(kokoTokenContract);
+    const catNFTContractAddress = "0x1f3c949c986b7fdD5e7CfB6836a3b457331626e8";
+    const catNFTContract = new ethers.Contract(
+      catNFTContractAddress,
+      kokoCatNFT.abi,
+      provider
+    );
     setkokoTokenContract(kokoTokenContract);
     setcatNFTContract(catNFTContract);
 
-    // const sepolia_RPC_url =
-    //   "https://eth-sepolia.g.alchemy.com/v2/2KkFyvuudsLojSoqpr7iZiC-iWImsIKk";
-    //  provider = new ethers.providers.JsonRpcProvider(sepolia_RPC_url);
-    // const catNFTContractAddress = "0xDEa41863976fB16eDDdfd5d113093f1848aa9532";
-    // const catNFTContract = new ethers.Contract(
-    //   catNFTContractAddress,
-    //   kokoCatNFT.abi,
-    //   provider
-    // );
-    // const kokoToken = new ethers.Contract(
-    //   catNFTContractAddress,
-    //   kokoCatNFT.abi,
-    //   provider
-    // );
     const catNFTproperties = [];
     const totalSupply = await catNFTContract.getTotalMintSupply();
     console.log("totalSupply", totalSupply.toString());
@@ -159,6 +188,7 @@ function Home({ accounts, setAccounts }) {
                   >
                     <button onClick={deployCatNFT_Onclick}>Deploy NFT</button>
                     <button onClick={loadBlockchainDataOnclick}>Reflesh</button>
+                    <button onClick={getBalanceOnclick}>getBalance</button>
                   </Flex>
                 </div>
               </Box>
