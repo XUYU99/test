@@ -8,13 +8,16 @@ import {ERC721Burnable} from "../openzeppelin/token/ERC721/extensions/ERC721Burn
 import {ERC721URIStorage} from "../openzeppelin/token/ERC721/extensions/ERC721URIStorage.sol";
 import {IERC20} from "../openzeppelin/token/ERC20/IERC20.sol";
 
+import "hardhat/console.sol";
+
 contract kokoCatNFT is ERC721, ERC721URIStorage, ERC721Burnable, AccessControl {
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     uint256 private _nextTokenId;
     uint256 public totalMintSupply;
-    // 引入 kokoToken 合约地址
-    address public kokoTokenAddress;
+    address public kokoTokenAddress; // 引入 kokoToken 合约地址
     IERC20 public kokoToken;
+    address public defaultAdmin;
+    address public minter;
 
     // 猫猫的综合信息结构体
     struct Property {
@@ -28,15 +31,17 @@ contract kokoCatNFT is ERC721, ERC721URIStorage, ERC721Burnable, AccessControl {
     mapping(uint256 => uint256) public catsAmount; //tokenId 对应 donateAmount，一个cat收到了多少捐赠
 
     constructor(
-        address defaultAdmin,
-        address minter,
+        address _defaultAdmin,
+        address _minter,
         address _kokoTokenAddress // kokoToken合约地址
     ) ERC721("Cat Property", "kokoCAT") {
-        _grantRole(DEFAULT_ADMIN_ROLE, defaultAdmin);
-        _grantRole(MINTER_ROLE, minter);
+        _grantRole(DEFAULT_ADMIN_ROLE, _defaultAdmin);
+        _grantRole(MINTER_ROLE, _minter);
         kokoTokenAddress = _kokoTokenAddress;
         kokoToken = IERC20(kokoTokenAddress); // 初始化kokoToken
         totalMintSupply = 0;
+        defaultAdmin = _defaultAdmin;
+        minter = _minter;
     }
 
     uint256 public newtokenId;
@@ -67,47 +72,52 @@ contract kokoCatNFT is ERC721, ERC721URIStorage, ERC721Burnable, AccessControl {
         return super.tokenURI(tokenId);
     }
 
-    function setApprove(uint256 donateValueInWei) public {
-        bool success;
-        // 使用 delegatecall 调用 approve 函数
-        (success, ) = kokoTokenAddress.call(
-            abi.encodeWithSignature(
-                "approve(address,uint256)",
-                address(this), // 注意：使用调用者合约的地址
-                donateValueInWei
-            )
-        );
-        require(success, "Token approve failed");
-    }
-
-    // 捐赠函数，捐赠 kokoToken 给 NFT 合约
+    // 捐赠
     function donate(uint256 tokenId, uint256 donateValueInWei) public payable {
-        // 获取该 tokenId 对应猫猫的最小捐赠金额
-        uint256 donateMinAmount = cats[tokenId].donateMinValue;
-
-        // 确保捐赠金额大于等于最小捐赠金额
-        require(
-            donateValueInWei >= donateMinAmount,
-            "Donation amount is below the minimum required"
+        address _kokoCatNFTAddress = address(this);
+        console.log(
+            "kokoCatNFT-donate()-kokoTokenAddress:",
+            address(kokoToken)
         );
-        bool success;
+        console.log("kokoCatNFT-donate()-msg.sender address:", _msgSender());
 
-        // 确保 donator 已经批准合约转账指定数量的 kokoToken
-        require(
-            kokoToken.allowance(msg.sender, address(this)) >= donateValueInWei,
-            "Insufficient allowance for donation"
+        // msgSender 的余额
+        uint256 _msgsenderBalance = kokoToken.balanceOf(_kokoCatNFTAddress);
+        console.log(
+            "kokoCatNFT-donate()-_msgsenderBalance:",
+            _msgsenderBalance
+        );
+        // catNFT 合约的余额
+        uint256 _kokoCatNFTAddressBalance = kokoToken.balanceOf(
+            _kokoCatNFTAddress
+        );
+        console.log(
+            "kokoCatNFT-donate()-_kokoCatNFTAddressBalance:",
+            _kokoCatNFTAddressBalance
         );
 
-        // 将捐赠的 kokoToken 转入 donateFundingPool
-        // address donateFundingPool = 0x90F79bf6EB2c4f870365E785982E1f101E93b906; // hardhat
-        address donateFundingPool = 0x3c86B2D477B07E8984802F8dDF9a9d58131ceDcB; // sepolia
-
-        success = kokoToken.transferFrom(
-            msg.sender,
-            donateFundingPool,
+        // 将基金转入 pool中
+        // address donateFundingPool = defaultAdmin;
+        // 将捐赠的钱转入 catNFT 合约中
+        bool success = kokoToken.transferFrom(
+            _msgSender(),
+            _kokoCatNFTAddress,
             donateValueInWei
         );
         require(success, "Token transfer failed");
+
+        // msgSender 的余额
+        _msgsenderBalance = kokoToken.balanceOf(_msgSender());
+        console.log(
+            "kokoCatNFT-donate()-_msgsenderBalance:",
+            _msgsenderBalance
+        );
+        // catNFT 合约的余额
+        _kokoCatNFTAddressBalance = kokoToken.balanceOf(_kokoCatNFTAddress);
+        console.log(
+            "kokoCatNFT-donate()-_kokoCatNFTAddressBalance:",
+            _kokoCatNFTAddressBalance
+        );
 
         // 更新猫猫的捐赠金额
         catsAmount[tokenId] += donateValueInWei;

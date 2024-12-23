@@ -548,40 +548,6 @@
         "console"
       ]
     },
-    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/catNFT/ERC721/IERC721Receiver.sol": {
-      "lastModificationDate": 1733627328051,
-      "contentHash": "cda7f161dd8a160dee34ee3e374cacb5",
-      "sourceName": "contracts/catNFT/ERC721/IERC721Receiver.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [],
-      "artifacts": [
-        "IERC721Receiver"
-      ]
-    },
     "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/catNFT/ERC721/ERROR.sol": {
       "lastModificationDate": 1733627328050,
       "contentHash": "9df212e692adfe3ae125317becccd6ef",
@@ -618,6 +584,40 @@
         "IERC1155Errors",
         "IERC20Errors",
         "IERC721Errors"
+      ]
+    },
+    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/catNFT/ERC721/IERC721Receiver.sol": {
+      "lastModificationDate": 1733627328051,
+      "contentHash": "cda7f161dd8a160dee34ee3e374cacb5",
+      "sourceName": "contracts/catNFT/ERC721/IERC721Receiver.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [],
+      "artifacts": [
+        "IERC721Receiver"
       ]
     },
     "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/catNFT/kokoNFT.sol": {
@@ -1044,44 +1044,6 @@
         "IERC721Errors"
       ]
     },
-    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/token/ERC721/IERC721.sol": {
-      "lastModificationDate": 1733627328088,
-      "contentHash": "e505e7331de08de27d06ab12b009a7d3",
-      "sourceName": "contracts/openzeppelin/token/ERC721/IERC721.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../../utils/introspection/IERC165.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "IERC721"
-      ]
-    },
     "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/token/ERC721/extensions/IERC721Metadata.sol": {
       "lastModificationDate": 1733627328092,
       "contentHash": "12c206f185cb951213799561fdcaa40d",
@@ -1157,6 +1119,44 @@
       ],
       "artifacts": [
         "ERC721Utils"
+      ]
+    },
+    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/token/ERC721/IERC721.sol": {
+      "lastModificationDate": 1733627328088,
+      "contentHash": "e505e7331de08de27d06ab12b009a7d3",
+      "sourceName": "contracts/openzeppelin/token/ERC721/IERC721.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../../utils/introspection/IERC165.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "IERC721"
       ]
     },
     "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/utils/math/Math.sol": {
@@ -1420,8 +1420,8 @@
       ]
     },
     "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/token/ERC20/ERC20.sol": {
-      "lastModificationDate": 1733822922120,
-      "contentHash": "2e112b84f2aafa2e53e6b323dcbfa74a",
+      "lastModificationDate": 1734935210185,
+      "contentHash": "75da8ff5b5d96e077d8cd8772158ac14",
       "sourceName": "contracts/openzeppelin/token/ERC20/ERC20.sol",
       "solcConfig": {
         "version": "0.8.27",
@@ -2394,44 +2394,6 @@
         "ERC1155"
       ]
     },
-    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/token/ERC1155/extensions/IERC1155MetadataURI.sol": {
-      "lastModificationDate": 1733627328082,
-      "contentHash": "fab9ef745a3c2aded4763099a6edcc0c",
-      "sourceName": "contracts/openzeppelin/token/ERC1155/extensions/IERC1155MetadataURI.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../IERC1155.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "IERC1155MetadataURI"
-      ]
-    },
     "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/token/ERC1155/IERC1155.sol": {
       "lastModificationDate": 1733627328080,
       "contentHash": "925077495d26c54ea16ad8254a6b8f25",
@@ -2468,6 +2430,44 @@
       ],
       "artifacts": [
         "IERC1155"
+      ]
+    },
+    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/token/ERC1155/extensions/IERC1155MetadataURI.sol": {
+      "lastModificationDate": 1733627328082,
+      "contentHash": "fab9ef745a3c2aded4763099a6edcc0c",
+      "sourceName": "contracts/openzeppelin/token/ERC1155/extensions/IERC1155MetadataURI.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../IERC1155.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "IERC1155MetadataURI"
       ]
     },
     "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/token/ERC1155/extensions/ERC1155URIStorage.sol": {
@@ -2663,8 +2663,8 @@
       ]
     },
     "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/governance/Governor.sol": {
-      "lastModificationDate": 1733627328062,
-      "contentHash": "588bef841a37e66c9a65fb476b7ccf7e",
+      "lastModificationDate": 1734943616822,
+      "contentHash": "2a83f10ec9ba0082920e2091dd7d432d",
       "sourceName": "contracts/openzeppelin/governance/Governor.sol",
       "solcConfig": {
         "version": "0.8.27",
@@ -2934,8 +2934,8 @@
       ]
     },
     "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/governance/extensions/GovernorVotes.sol": {
-      "lastModificationDate": 1733627328067,
-      "contentHash": "4d06bb4ab2db87cbc2c63457966580c1",
+      "lastModificationDate": 1734688655031,
+      "contentHash": "239ad826b3852bc64ea5ef17d82987fa",
       "sourceName": "contracts/openzeppelin/governance/extensions/GovernorVotes.sol",
       "solcConfig": {
         "version": "0.8.27",
@@ -3484,10 +3484,10 @@
         "IERC2612"
       ]
     },
-    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/kokoDao/kokoToken.sol": {
-      "lastModificationDate": 1733627328054,
-      "contentHash": "e165356e26343f60fc2841e437392a33",
-      "sourceName": "contracts/kokoDao/kokoToken.sol",
+    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/kokoDao/kokoToken2.sol": {
+      "lastModificationDate": 1733984572412,
+      "contentHash": "32f24dd44ac6d793174965022694a1c1",
+      "sourceName": "contracts/kokoDao/kokoToken2.sol",
       "solcConfig": {
         "version": "0.8.27",
         "settings": {
@@ -3523,12 +3523,332 @@
         "^0.8.0"
       ],
       "artifacts": [
+        "kokoToken2"
+      ]
+    },
+    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/kokoDao/kokoToken.sol": {
+      "lastModificationDate": 1734949612388,
+      "contentHash": "231fcf1410b42b236c2930c5e3195154",
+      "sourceName": "contracts/kokoDao/kokoToken.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../openzeppelin/access/AccessControl.sol",
+        "../openzeppelin/token/ERC20/ERC20.sol",
+        "../openzeppelin/token/ERC20/extensions/ERC20Burnable.sol",
+        "../openzeppelin/token/ERC20/extensions/ERC20Permit.sol",
+        "../openzeppelin/token/ERC20/extensions/ERC20Votes.sol",
+        "../openzeppelin/utils/Nonces.sol",
+        "hardhat/console.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.22"
+      ],
+      "artifacts": [
         "kokoToken"
       ]
     },
+    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/access/AccessControl.sol": {
+      "lastModificationDate": 1733627328056,
+      "contentHash": "ada552a2a83084f07d0058d064b2568a",
+      "sourceName": "contracts/openzeppelin/access/AccessControl.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IAccessControl.sol",
+        "../utils/Context.sol",
+        "../utils/introspection/ERC165.sol",
+        "hardhat/console.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "AccessControl"
+      ]
+    },
+    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/token/ERC20/extensions/ERC20Burnable.sol": {
+      "lastModificationDate": 1733627328084,
+      "contentHash": "273d8d24b06f67207dd5f35c3a0c1086",
+      "sourceName": "contracts/openzeppelin/token/ERC20/extensions/ERC20Burnable.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../ERC20.sol",
+        "../../../utils/Context.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "ERC20Burnable"
+      ]
+    },
+    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/access/IAccessControl.sol": {
+      "lastModificationDate": 1733627328056,
+      "contentHash": "22b5e9cf15a5316441bdc9d2a1ce8e21",
+      "sourceName": "contracts/openzeppelin/access/IAccessControl.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "IAccessControl"
+      ]
+    },
+    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/governance/TimelockController.sol": {
+      "lastModificationDate": 1733627328064,
+      "contentHash": "0b8a25d0b588f4252f5256ffefce7f7a",
+      "sourceName": "contracts/openzeppelin/governance/TimelockController.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../access/AccessControl.sol",
+        "../token/ERC721/utils/ERC721Holder.sol",
+        "../token/ERC1155/utils/ERC1155Holder.sol",
+        "../utils/Address.sol",
+        "hardhat/console.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "TimelockController"
+      ]
+    },
+    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/token/ERC721/utils/ERC721Holder.sol": {
+      "lastModificationDate": 1733627328093,
+      "contentHash": "8cd14f03f1cc06f0a638da5209d716d4",
+      "sourceName": "contracts/openzeppelin/token/ERC721/utils/ERC721Holder.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../IERC721Receiver.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "ERC721Holder"
+      ]
+    },
+    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/token/ERC1155/utils/ERC1155Holder.sol": {
+      "lastModificationDate": 1733627328082,
+      "contentHash": "9aa0625b699200b36ebca533f27c7848",
+      "sourceName": "contracts/openzeppelin/token/ERC1155/utils/ERC1155Holder.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../../../utils/introspection/ERC165.sol",
+        "../IERC1155Receiver.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "ERC1155Holder"
+      ]
+    },
+    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/governance/extensions/GovernorTimelockControl.sol": {
+      "lastModificationDate": 1733627328067,
+      "contentHash": "65d6fc363751c654a2cdf50dcb68b165",
+      "sourceName": "contracts/openzeppelin/governance/extensions/GovernorTimelockControl.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../Governor.sol",
+        "../TimelockController.sol",
+        "../../interfaces/IERC165.sol",
+        "../../utils/math/SafeCast.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "GovernorTimelockControl"
+      ]
+    },
     "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/kokoDao/xytGovernor.sol": {
-      "lastModificationDate": 1733801221851,
-      "contentHash": "cb17d082cca6ffa225c5a0572fbc2dff",
+      "lastModificationDate": 1734714529590,
+      "contentHash": "48c7479c6b8e73b27056e591f71705d0",
       "sourceName": "contracts/kokoDao/xytGovernor.sol",
       "solcConfig": {
         "version": "0.8.27",
@@ -3646,10 +3966,10 @@
         "GovernorCountingSimple"
       ]
     },
-    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/governance/extensions/GovernorTimelockControl.sol": {
-      "lastModificationDate": 1733627328067,
-      "contentHash": "65d6fc363751c654a2cdf50dcb68b165",
-      "sourceName": "contracts/openzeppelin/governance/extensions/GovernorTimelockControl.sol",
+    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/governance/extensions/GovernorCountingFractional.sol": {
+      "lastModificationDate": 1733627328065,
+      "contentHash": "232a41190059c05d383d3be8cc7241d9",
+      "sourceName": "contracts/openzeppelin/governance/extensions/GovernorCountingFractional.sol",
       "solcConfig": {
         "version": "0.8.27",
         "settings": {
@@ -3676,21 +3996,20 @@
       },
       "imports": [
         "../Governor.sol",
-        "../TimelockController.sol",
-        "../../interfaces/IERC165.sol",
-        "../../utils/math/SafeCast.sol"
+        "./GovernorCountingSimple.sol",
+        "../../utils/math/Math.sol"
       ],
       "versionPragmas": [
         "^0.8.20"
       ],
       "artifacts": [
-        "GovernorTimelockControl"
+        "GovernorCountingFractional"
       ]
     },
-    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/governance/TimelockController.sol": {
-      "lastModificationDate": 1733627328064,
-      "contentHash": "0b8a25d0b588f4252f5256ffefce7f7a",
-      "sourceName": "contracts/openzeppelin/governance/TimelockController.sol",
+    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/kokoDao/TimeLock.sol": {
+      "lastModificationDate": 1733627328053,
+      "contentHash": "337b97a39aae6847b7626239eac67569",
+      "sourceName": "contracts/kokoDao/TimeLock.sol",
       "solcConfig": {
         "version": "0.8.27",
         "settings": {
@@ -3716,171 +4035,13 @@
         }
       },
       "imports": [
-        "../access/AccessControl.sol",
-        "../token/ERC721/utils/ERC721Holder.sol",
-        "../token/ERC1155/utils/ERC1155Holder.sol",
-        "../utils/Address.sol",
-        "hardhat/console.sol"
+        "../openzeppelin/governance/TimelockController.sol"
       ],
       "versionPragmas": [
         "^0.8.20"
       ],
       "artifacts": [
-        "TimelockController"
-      ]
-    },
-    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/access/AccessControl.sol": {
-      "lastModificationDate": 1733627328056,
-      "contentHash": "ada552a2a83084f07d0058d064b2568a",
-      "sourceName": "contracts/openzeppelin/access/AccessControl.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./IAccessControl.sol",
-        "../utils/Context.sol",
-        "../utils/introspection/ERC165.sol",
-        "hardhat/console.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "AccessControl"
-      ]
-    },
-    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/token/ERC721/utils/ERC721Holder.sol": {
-      "lastModificationDate": 1733627328093,
-      "contentHash": "8cd14f03f1cc06f0a638da5209d716d4",
-      "sourceName": "contracts/openzeppelin/token/ERC721/utils/ERC721Holder.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../IERC721Receiver.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "ERC721Holder"
-      ]
-    },
-    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/token/ERC1155/utils/ERC1155Holder.sol": {
-      "lastModificationDate": 1733627328082,
-      "contentHash": "9aa0625b699200b36ebca533f27c7848",
-      "sourceName": "contracts/openzeppelin/token/ERC1155/utils/ERC1155Holder.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../../../utils/introspection/ERC165.sol",
-        "../IERC1155Receiver.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "ERC1155Holder"
-      ]
-    },
-    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/access/IAccessControl.sol": {
-      "lastModificationDate": 1733627328056,
-      "contentHash": "22b5e9cf15a5316441bdc9d2a1ce8e21",
-      "sourceName": "contracts/openzeppelin/access/IAccessControl.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "IAccessControl"
+        "TimeLock"
       ]
     },
     "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/access/extensions/AccessControlEnumerable.sol": {
@@ -4152,8 +4313,8 @@
       ]
     },
     "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/catNFT/kokoCatNFT.sol": {
-      "lastModificationDate": 1733886898324,
-      "contentHash": "3ae903248877251429898e9eacf55b7c",
+      "lastModificationDate": 1734964184464,
+      "contentHash": "73f9f1f83b348fea82e175e2ffd2f15e",
       "sourceName": "contracts/catNFT/kokoCatNFT.sol",
       "solcConfig": {
         "version": "0.8.27",
@@ -4184,7 +4345,8 @@
         "../openzeppelin/token/ERC721/ERC721.sol",
         "../openzeppelin/token/ERC721/extensions/ERC721Burnable.sol",
         "../openzeppelin/token/ERC721/extensions/ERC721URIStorage.sol",
-        "../openzeppelin/token/ERC20/IERC20.sol"
+        "../openzeppelin/token/ERC20/IERC20.sol",
+        "hardhat/console.sol"
       ],
       "versionPragmas": [
         "^0.8.22"
@@ -4459,84 +4621,6 @@
       ],
       "artifacts": [
         "ERC20Wrapper"
-      ]
-    },
-    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/kokoDao/TimeLock.sol": {
-      "lastModificationDate": 1733627328053,
-      "contentHash": "337b97a39aae6847b7626239eac67569",
-      "sourceName": "contracts/kokoDao/TimeLock.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../openzeppelin/governance/TimelockController.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "TimeLock"
-      ]
-    },
-    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/governance/extensions/GovernorCountingFractional.sol": {
-      "lastModificationDate": 1733627328065,
-      "contentHash": "232a41190059c05d383d3be8cc7241d9",
-      "sourceName": "contracts/openzeppelin/governance/extensions/GovernorCountingFractional.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../Governor.sol",
-        "./GovernorCountingSimple.sol",
-        "../../utils/math/Math.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "GovernorCountingFractional"
       ]
     },
     "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/governance/extensions/GovernorTimelockCompound.sol": {
@@ -5548,45 +5632,6 @@
         "ERC20Capped"
       ]
     },
-    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/token/ERC20/extensions/ERC20Burnable.sol": {
-      "lastModificationDate": 1733627328084,
-      "contentHash": "273d8d24b06f67207dd5f35c3a0c1086",
-      "sourceName": "contracts/openzeppelin/token/ERC20/extensions/ERC20Burnable.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../ERC20.sol",
-        "../../../utils/Context.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "ERC20Burnable"
-      ]
-    },
     "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/openzeppelin/access/Ownable.sol": {
       "lastModificationDate": 1733627328056,
       "contentHash": "327df3ec29f3aab85a8c9e49179359a0",
@@ -6061,6 +6106,50 @@
       ],
       "artifacts": [
         "ReentrancyGuard"
+      ]
+    },
+    "/Users/koko/Desktop/code/studyCode/React/test/react-demo-01/contracts/kokoDao/createToken.sol": {
+      "lastModificationDate": 1734941033649,
+      "contentHash": "99041ec4d62e02ec8b9c0d5fb034bde6",
+      "sourceName": "contracts/kokoDao/createToken.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../openzeppelin/access/AccessControl.sol",
+        "../openzeppelin/token/ERC20/ERC20.sol",
+        "../openzeppelin/token/ERC20/extensions/ERC20Burnable.sol",
+        "../openzeppelin/token/ERC20/extensions/ERC20Permit.sol",
+        "../openzeppelin/token/ERC20/extensions/ERC20Votes.sol",
+        "../openzeppelin/utils/Nonces.sol",
+        "hardhat/console.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.22"
+      ],
+      "artifacts": [
+        "createToken"
       ]
     }
   }

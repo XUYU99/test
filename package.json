@@ -28,7 +28,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build -r https://github.com/XUYU99/test.git -b gh-pages"
   },
-  "homepage": "https://github.com/XUYU99/test",
+  "homepage": ".",
   "eslintConfig": {
     "extends": [
       "react-app",

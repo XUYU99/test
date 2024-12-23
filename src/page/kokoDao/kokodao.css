@@ -9,44 +9,47 @@
   flex-direction: column;
 }
 
-/* 容器 */
 .kokoDao_container {
   display: flex; /* 使用 Flexbox 布局 */
-  height: 100%; /* 除去导航栏的高度 */
-  width: 100%;
+  height: 100%; /* 使容器高度占满父容器 */
+  width: 100%; /* 宽度占满父容器 */
   box-sizing: border-box;
-  flex-direction: row;
+  flex-direction: row; /* 设置为水平排列 */
+  justify-content: space-between; /* 在两部分之间留出空间 */
+  align-items: center; /* 上下居中 */
 }
 
 /* 提案列表 */
 .kokoDao_proposallist {
-  padding: 20px; /* 内边距 */
+  flex: 1; /* 左侧占用 50% 空间 */
+  padding: 5px; /* 内边距 */
+  height: 100%;
+  border-right: 1px solid #dddddd39; /* 添加分隔线（可选） */
 }
 
 /* 操作区域 */
+.kokoDao_operate_container {
+  flex: 2; /* 右侧占用 50% 空间 */
+  width: 100%;
+  height: 100%;
+  justify-content: center; /* 子元素上下居中 */
+  align-items: center; /* 子元素水平居中 */
+}
 .kokoDao_operate {
-  flex: 1; /* 左侧占用剩余空间 */
-  padding: 30px; /* 内边距 */
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* 水平居中对齐 */
-  justify-content: center; /* 垂直居中对齐 */
+  flex-direction: column; /* 子元素垂直排列 */
+  padding: 50px 10px;
 }
-
-/* 文本样式 */
-.kokoDao_operate h1 {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 20px;
+.DAO_title {
+  margin-bottom: 30px;
 }
-
 .kokoDao_operate input {
   color: #000000;
   font-family: inherit;
-  width: 230px;
+  width: 180px;
   height: 30px;
+  font-size: 13px;
   text-align: center;
-  padding: 18px;
+  padding: 5px;
   margin: 10px;
 }
 
@@ -56,7 +59,7 @@
   box-sizing: 0px 2px 2px 1px var(--clr-black);
   color: white;
   cursor: pointer;
-  font-size: inherit;
+  font-size: 13px;
   padding: 10px;
   margin-bottom: 30px;
   margin: 10px;
@@ -65,7 +68,7 @@
 .kokoDao_propose,
 .kokoDao_vote,
 .kokoDao_execute {
-  margin: 20px;
+  margin: 10px;
 }
 
 /* ---------------proposal list------------- */
@@ -73,19 +76,17 @@
 .proposal-container {
   display: flex; /* 使用 Flexbox 布局 */
   flex-direction: column; /* 垂直排列 */
-  height: 100vh; /* 高度为视口高度 */
+  height: 100%; /* 高度为视口高度 */
   width: 100%; /* 宽度占满页面 */
-  box-sizing: border-box;
 }
 
 /* 提案列表样式 */
 .proposal_card_list {
   height: 80vh;
-  padding: 20px; /* 内边距 */
+  margin-top: 10px;
   display: flex;
   flex-direction: column; /* 垂直排列卡片 */
   overflow-y: auto; /* 启用垂直滚动 */
-  justify-content: center; /* 按钮居中对齐 */
   align-items: center; /* 垂直居中对齐 */
 }
 /* 提案列表滚动条样式 */
@@ -106,47 +107,61 @@
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   padding: 8px;
-  margin: 30px;
-  max-width: 380px;
+  margin: 10px;
+  max-width: 330px;
+  background-color: #40404050;
 }
 /* 刷新和 moveBlock 按钮区域样式 */
 .refresh_moveblock {
-  padding: 10px 30px; /* 内边距 */
-  margin: 20px;
   display: flex;
+  margin: 10px 0px;
   justify-content: center; /* 按钮居中对齐 */
   align-items: center; /* 垂直居中对齐 */
 }
 /* 刷新按钮样式 */
 .refresh-btn {
-  font-size: 18px;
-  margin: 0px 20px;
+  font-size: 14px;
+  margin: 10px;
 }
 /* 时间戳样式 */
 .proposal-timestamp {
-  font-size: 12px;
+  font-size: 11px;
   color: gray;
 }
 
 /* 提案描述按钮样式 */
 .proposal-description-btn {
   margin-top: 12px;
+  font-size: 14px;
   white-space: normal;
   word-break: break-word;
 }
 
+.proposal-card h5 {
+  font-size: 10px;
+  margin-top: 5px;
+  color: rgb(246, 211, 211);
+}
 /* 提案 ID 样式 */
 .proposal-id {
-  font-size: 13px;
+  font-size: 11px;
   color: gray;
   margin-top: 8px;
 }
 
-/* 提案状态样式 */
+/* 提案时间状态样式 */
 .proposal-status {
-  font-size: 14px;
+  font-size: 12px;
   color: rgb(196, 195, 195);
-  margin-top: 8px;
+  margin-top: 20px;
+}
+
+.proposal-status.poll-ended {
+  color: rgb(255, 161, 161);
+}
+
+.proposal-status.poll-in-progress {
+  color: rgb(152, 173, 235);
 }
 
 /* 进度条外层样式 */
@@ -159,29 +174,27 @@
   overflow: hidden;
   margin-top: 8px;
 }
-
-/* 反对进度条样式 */
-.progress-bar-oppose {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  background-color: #e53e3e;
-}
-
 /* 支持进度条样式 */
 .progress-bar-support {
   position: absolute;
   top: 0;
+  left: 0;
   height: 100%;
   background-color: #3182ce;
+}
+/* 反对进度条样式 */
+.progress-bar-oppose {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  background-color: #e53e3e;
 }
 
 /* 弃权进度条样式 */
 .progress-bar-abstain {
   position: absolute;
   top: 0;
-  right: 0;
   height: 100%;
   background-color: #ecc94b;
 }
@@ -194,13 +207,14 @@
 }
 
 .support-statistics-text {
-  font-size: 12px;
-  color: #718096;
+  font-size: 11px;
+  color: #adbedf;
 }
 
 /* 交易哈希按钮样式 */
-.transaction-hash-btn {
+.transaction-targets-btn {
   margin-top: 12px;
+  font-size: 10px;
   white-space: normal;
   word-break: break-word;
 }
@@ -237,5 +251,85 @@
     flex-direction: column;
     align-items: center; /* 水平居中对齐 */
     justify-content: center; /* 垂直居中对齐 */
+  }
+
+  /* -----------弹窗 loading-----------*/
+
+  .loading-overlay {
+    z-index: 4;
+    position: fixed; /* 将覆盖层固定在屏幕上 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
+    display: flex; /* 使用 flexbox */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+  }
+  .loading-spinner {
+    background-color: #fff; /* 背景色可以根据需要调整 */
+    padding: 15px;
+    font-size: 13px;
+    border-radius: 10px; /* 可选，圆角 */
+    color: #333; /* 字体颜色 */
+    display: flex; /* 使用 flexbox */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    flex-direction: column; /* 垂直排列子元素 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+    animation: fadeIn 0.3s ease-out; /* 弹窗淡入动画 */
+  }
+  .loading-successmessage {
+    background-color: #fff; /* 背景色可以根据需要调整 */
+    width: auto; /* 容器宽度 */
+    height: auto; /* 容器高度自动适应内容 */
+    border-radius: 10px; /* 圆角 */
+    display: flex; /* 使用 flexbox */
+    flex-direction: column; /* 垂直排列子元素 */
+    justify-content: flex-start; /* 内容从顶部开始排列 */
+    align-items: flex-start; /* 左对齐 */
+    padding: 30px; /* 内边距 */
+  }
+  .loading-successmessage h2 {
+    font-size: 19px;
+    margin: 10px;
+  }
+  .loading-successmessage p {
+    font-size: 15px;
+    margin: 10px;
+  }
+
+  /* 成功消息按钮样式 */
+  .successmessage-button {
+    width: 150px;
+    height: 50px;
+    margin: 20px;
+    background-color: var(--clr-pink);
+    color: var(--clr-white);
+    border: none;
+    border-radius: 5px; /* 更圆润的边角 */
+    cursor: pointer;
+    transition: all 250ms ease;
+  }
+
+  .successmessage-button:hover {
+    background-color: var(--clr-pink-2); /* 按钮悬停效果 */
+  }
+
+  .successmessage-button:active {
+    transform: scale(0.98); /* 按钮点击时缩放效果 */
+  }
+
+  /* 弹窗淡入动画 */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 }

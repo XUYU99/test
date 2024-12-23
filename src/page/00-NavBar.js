@@ -49,13 +49,14 @@ const NavBar = ({ accounts, setAccounts }) => {
             justify="space-around"
             align="center"
             width="40%"
-            padding="30px"
+            padding="25px"
+            fontSize="13px"
           >
             <button onClick={mintOnclick}>Mint</button>
             <Spacer />
             <button onClick={joinOnclick}>Join</button>
             <Spacer />
-            <Box margin="0 15px">Email</Box>
+            <button>Email</button>
             <Spacer />
           </Flex>
           <Flex
@@ -63,11 +64,9 @@ const NavBar = ({ accounts, setAccounts }) => {
             align="center"
             width="40%"
             padding="0 40px"
+            fontSize="13px"
           >
-            <button onClick={homeClick}>
-              <Spacer />
-              Home
-            </button>
+            <button onClick={homeClick}>Home</button> <Spacer />
             {isConnected ? (
               <Flex align="center">
                 <Box margin="0 5px">
@@ -85,7 +84,7 @@ const NavBar = ({ accounts, setAccounts }) => {
                 borderRadius="5px"
                 width="240px"
                 height="43px"
-                fontSize="15"
+                fontSize="13px"
                 boxShadow="0px 2px 2px 1px #OFOFOF"
                 color="white"
                 cursor="pointer"

@@ -3,9 +3,9 @@ import "./App.css";
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./page/Home";
-import Mint from "./page/kokoDao/Mint";
+import Mint from "./page/mintCoin";
 import Kokoworld from "./page/kokoDao/01-kokoWorld";
-import ProposalDetail from "./page/kokoDao/proposalDetail";
+// import ProposalDetail from "./page/kokoDao/proposalDetail";
 
 function App() {
   // 使用 React 的 useState 钩子来存储和更新用户账户信息
@@ -14,8 +14,8 @@ function App() {
   return (
     <div className="overlay">
       <div className="App">
-        {/* <Router basename="/test"> */}
-        <Router>
+        <Router basename="/test">
+          {/* <Router> */}
           <Routes>
             {/* 定义根路径 "/" 对应的组件为 Home */}
             <Route
@@ -35,12 +35,12 @@ function App() {
               }
             />
             {/* 定义路径 "/ProposalDetail" 对应的组件为 ProposalDetail */}
-            <Route
+            {/* <Route
               path="/ProposalDetail"
               element={
                 <ProposalDetail accounts={accounts} setAccounts={setAccounts} />
               }
-            />
+            /> */}
           </Routes>
         </Router>
         <div className="moving-background"></div>
